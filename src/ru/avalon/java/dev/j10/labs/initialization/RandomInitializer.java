@@ -21,9 +21,28 @@ public class RandomInitializer implements Initializer {
      *
      * @param array массив, подлежащий инициализации
      */
+    private int bottomLimit;
+    private int topLimit;
+
+    public RandomInitializer(int bottomLimit, int topLimit){
+        this.bottomLimit = bottomLimit;
+        this.topLimit = topLimit;
+    }
+
     public void initialize(int[] array) {
         /*
          * TODO(Студент): Реализовать метод initialize класса RandomInitializer
          */
+        if (array != null)
+            for (int i = 0; i < array.length; i++)
+                array[i] = generate();
+    }
+
+    private int generate(){
+        int moduleOfBottomLimit = (bottomLimit < 0) ? -bottomLimit : bottomLimit;
+        int moduleOfTopLimit = (topLimit < 0) ? -topLimit : topLimit;
+        int sumOfLimits = moduleOfBottomLimit + moduleOfTopLimit;
+
+        return (int)(Math.random()*(sumOfLimits + 1)) - moduleOfBottomLimit;
     }
 }
